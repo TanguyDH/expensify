@@ -48,7 +48,7 @@ class FormExpense extends React.Component {
           this.props.onSubmit({
               description: this.state.description, 
               note: this.state.note,
-              amount:  this.state.amount,
+              amount: parseFloat(this.state.amount,10),
               createdAt: this.state.createdAt.valueOf()
           })
       }

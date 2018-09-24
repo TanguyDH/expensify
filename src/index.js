@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import ReducerExpenses from './store/reducers/expenses';
 import ReducerFilters from './store/reducers/filters';
 
@@ -37,8 +37,8 @@ const app = (
  store.subscribe(() => console.log(store.getState()));
 
 
- store.dispatch(addExpense({description:'sisi', amount:'3'}));
- store.dispatch(addExpense({ description: 'lol', amount: '55' }));
+ store.dispatch(addExpense({description:'sisi', amount:3}));
+ store.dispatch(addExpense({ description: 'lol', amount: 55 }));
 
 
 
