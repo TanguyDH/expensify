@@ -7,13 +7,13 @@ import moment from 'moment';
 class FormExpense extends React.Component {
   state = {
     description: this.props.expense ? this.props.expense.description : "",
-    amount: this.props.expense ? this.props.expense.amount : "",
+    amount: this.props.expense ? (this.props.expense.amount).toString() : "",
     note: this.props.expense ? this.props.expense.note : "",
     createdAt:this.props.expense ?  moment(this.props.expense.createdAt) :  moment(),
     focused: null,
     error: null
   };
-  
+
   onChangeDescription = e => {
     const description = e.target.value;
     this.setState(() => ({
@@ -48,7 +48,7 @@ class FormExpense extends React.Component {
           this.props.onSubmit({
               description: this.state.description, 
               note: this.state.note,
-              amount: this.state.amount,
+              amount:  this.state.amount,
               createdAt: this.state.createdAt.valueOf()
           })
       }
@@ -66,7 +66,7 @@ class FormExpense extends React.Component {
             value={this.state.description}
           />
           <input
-            type="number"
+            type="text"
             placeholder="amount"
             onChange={this.onChangeAmount}
             value={this.state.amount}
