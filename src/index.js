@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
+import { startSetExpenses } from './store/actions/expenses';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import ReducerExpenses from './store/reducers/expenses';
 import ReducerFilters from './store/reducers/filters';
+import './firebase/firebase';
+import thunk from 'redux-thunk';
 
-
-import {addExpense} from './store/actions/expenses';
-
+const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   expenses: ReducerExpenses,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhencers(applyMiddleware(thunk))
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 const app = (
@@ -32,21 +34,11 @@ const app = (
 );
 
 
+ReactDOM.render(<p>...loading</p>, document.getElementById('root'));
+
+store.dispatch(startSetExpenses()).then(() =>{
+  ReactDOM.render(app, document.getElementById("root"));
+})
 
 
- store.subscribe(() => console.log(store.getState()));
-
-
- store.dispatch(addExpense({description:'sisi', amount:3}));
- store.dispatch(addExpense({ description: 'lol', amount: 55 }));
-
-
-
-
-
-
-
-
-
-ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();
