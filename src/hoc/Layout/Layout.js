@@ -2,13 +2,14 @@ import React from 'react';
 import Header from '../../component/Navigation/Header/Header';
  
 const Layout = (props) => {
+
     return (
-        <div>
+        <React.Fragment>
             <Header />
             <main>
                 {props.children}
             </main>
-        </div>
+        </React.Fragment>
     )
 }
 
