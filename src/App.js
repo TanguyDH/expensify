@@ -8,11 +8,12 @@ import NotFound from './container/NotFound/NotFound';
 import "react-dates/lib/css/_datepicker.css";
 import LoginPage from './container/LoginPage/LoginPage';
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
  const App = () => (
 
   <Switch>
-    <Route path='/' exact component={LoginPage} />
+    <PublicRoute path='/' exact component={LoginPage} />
     <PrivateRoute path="/dashboard" component={Dashboard} />
     <PrivateRoute path="/edit/:id"  component={EditExpensive} />
     <PrivateRoute path="/create"  component={CreateExpensive} />

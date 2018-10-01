@@ -10,7 +10,7 @@ class EditExpensive extends React.Component{
     }
     removeExpense = () =>{
         this.props.startRemoveExpense(this.props.match.params.id);
-        this.props.history.push('/');
+        this.props.history.push("/dashboard");
     }
     render(){
         console.log(this.props.expenseSelected);
